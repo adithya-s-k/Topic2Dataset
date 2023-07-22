@@ -1,0 +1,5 @@
+tqdm
+langchain
+openai
+tiktoken
+nltk
