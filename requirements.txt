@@ -5,3 +5,12 @@ tiktoken
 nltk
 faiss-cpu
 guardrails-ai
+trl
+transformers
+accelerate
+peft @ git+https://github.com/huggingface/peft.git@e06d94ddeb6c70913593740618df76908b918d66
+datasets
+bitsandbytes
+einops
+scipy
+wandb
