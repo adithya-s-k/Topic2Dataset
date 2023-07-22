@@ -119,7 +119,7 @@ def traverse_and_extract(root_folder):
 def num_tokens_from_string(string: str, encoding_name: str) -> int:
     """Returns the number of tokens in a text string."""
     encoding = tiktoken.get_encoding(encoding_name)
-    num_tokens = len(encoding.encode(string))
+    num_tokens = len(encoding.encode(string)) 
     return num_tokens
 
 def num_words_from_string(string: str) -> int:
@@ -139,6 +139,38 @@ def write_to_csv(data, output_file):
         writer.writerows([(filepath, heading_text, heading_content, num_tokens, num_words) for filepath, _, heading_text, heading_content, num_tokens, num_words in data])
 
 
+def calculate_generate_data(num_tokens):
+    """
+    Calculate the value of generate_data based on the number of tokens.
+    """
+    return (num_tokens + 299) // 300
+
+def process_csv(input_file):
+    # Read the entire CSV into a list in memory
+    with open(input_file, 'r', encoding='utf-8') as infile:
+        reader = csv.reader(infile)
+        
+        # Read the header and add the new 'Generate Data' column
+        header = next(reader)
+        header.append('Generate Data')
+        
+        rows = [header]
+        
+        # Process each row in the CSV
+        for row in reader:
+            num_tokens = int(row[3])  # Assuming 'Num Tokens' is the 4th column (0-indexed)
+            generate_data = calculate_generate_data(num_tokens)
+
+            # Add the new generate_data value to the row
+            row.append(generate_data)
+            rows.append(row)
+            
+    # Write the processed rows back to the same file
+    with open(input_file, 'w', newline='', encoding='utf-8') as outfile:
+        writer = csv.writer(outfile)
+        writer.writerows(rows)
+
+
 if __name__ == "__main__":
     root_folder = "documentation"
     output_csv = "output.csv"
@@ -149,3 +181,4 @@ if __name__ == "__main__":
 
     extracted_data = traverse_and_extract(root_folder)
     write_to_csv(extracted_data, output_csv)
+    process_csv(output_csv)
