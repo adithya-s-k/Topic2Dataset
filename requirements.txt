@@ -4,3 +4,4 @@ openai
 tiktoken
 nltk
 faiss-cpu
+guardrails-ai
