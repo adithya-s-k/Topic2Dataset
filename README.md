@@ -47,8 +47,7 @@ If you use Document-Instruct in your research, please cite the following paper:
 ```
 @article{document-instruct,
   title={Document-Instruct: AI-Assisted Document Understanding through Tailored Instruction Fine-tuning},
-  author={Your Name},
-  journal={Conference on Neural Information Processing Systems (NeurIPS)},
+  author={Adithya S K},
   year={2023}
 }
 ```
