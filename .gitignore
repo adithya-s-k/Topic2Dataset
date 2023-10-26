@@ -174,3 +174,5 @@ cython_debug/
 .idea/inspectionProfiles/Project_Default.xml
 ignore.py
 dataset.json
+
+/documents
